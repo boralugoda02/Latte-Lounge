@@ -1,0 +1,32 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a slice of Ceylon butter cake on a plate">
+  <rect width="400" height="300" fill="#E05D8E"/>
+  <rect width="400" height="300" fill="#000000" fill-opacity="0.08"/>
+
+  <!-- plate -->
+  <ellipse cx="200" cy="215" rx="130" ry="22" fill="#FBF8F6"/>
+  <ellipse cx="200" cy="215" rx="130" ry="22" fill="none" stroke="#000000" stroke-width="2"/>
+  <ellipse cx="200" cy="211" rx="90" ry="14" fill="none" stroke="#000000" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- cake slice (side view triangle wedge) -->
+  <g>
+    <path d="M120 205 L280 205 L200 90 Z" fill="#F0D9A8" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- layers -->
+    <line x1="150" y1="175" x2="250" y2="175" stroke="#000000" stroke-width="1.5" opacity="0.5"/>
+    <line x1="163" y1="150" x2="237" y2="150" stroke="#000000" stroke-width="1.5" opacity="0.5"/>
+    <line x1="178" y1="122" x2="222" y2="122" stroke="#000000" stroke-width="1.5" opacity="0.5"/>
+    <!-- top icing drip -->
+    <path d="M120 205 Q140 195 160 205 T200 205 T240 205 T280 205 L280 195 Q260 185 240 195 T200 190 T160 195 T120 195 Z"
+          fill="#FBF8F6" stroke="#000000" stroke-width="1.5"/>
+  </g>
+
+  <!-- cherry on top -->
+  <circle cx="200" cy="92" r="9" fill="#B84571" stroke="#000000" stroke-width="1.5"/>
+  <path d="M200 83 Q205 68 214 62" fill="none" stroke="#3A503C" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- fork -->
+  <g transform="translate(315,150) rotate(20)">
+    <rect x="-4" y="0" width="8" height="70" rx="3" fill="#FBF8F6" stroke="#000000" stroke-width="1.5"/>
+    <path d="M-10 -20 L-10 4 M-3 -22 L-3 4 M4 -22 L4 4 M11 -20 L11 4" stroke="#000000" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M-10 4 Q0 12 12 4" fill="none" stroke="#000000" stroke-width="1.5"/>
+  </g>
+</svg>

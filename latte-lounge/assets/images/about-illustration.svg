@@ -1,0 +1,34 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of a winding mountain highway through hill-country tea estates near Bandarawela">
+  <rect width="400" height="300" fill="#000000"/>
+
+  <!-- sky gradient feel via layered mist -->
+  <rect width="400" height="120" fill="#FBF8F6" fill-opacity="0.05"/>
+
+  <!-- far ridgeline -->
+  <path d="M0 130 Q70 100 140 125 T280 115 T400 130 V160 H0 Z" fill="#3A503C" fill-opacity="0.55"/>
+  <!-- mid ridge -->
+  <path d="M0 155 Q90 115 180 150 T400 150 V190 H0 Z" fill="#3A503C" fill-opacity="0.8"/>
+  <!-- near hill -->
+  <path d="M0 185 Q100 140 200 180 T400 175 V300 H0 Z" fill="#3A503C"/>
+
+  <!-- tea rows on near hill -->
+  <g stroke="#26362A" stroke-width="2" opacity="0.6">
+    <path d="M20 220 Q100 200 180 215"/>
+    <path d="M30 235 Q110 215 190 230"/>
+    <path d="M40 250 Q120 232 200 245"/>
+    <path d="M220 210 Q300 195 380 205"/>
+    <path d="M225 225 Q305 210 385 220"/>
+  </g>
+
+  <!-- road winding down -->
+  <path d="M195 300 C205 260 175 240 195 210 C215 180 185 160 200 130 C210 110 195 95 200 80"
+        fill="none" stroke="#FBF8F6" stroke-width="14" stroke-linecap="round"/>
+  <path d="M195 300 C205 260 175 240 195 210 C215 180 185 160 200 130 C210 110 195 95 200 80"
+        fill="none" stroke="#E05D8E" stroke-width="1.5" stroke-dasharray="6 8" stroke-linecap="round"/>
+
+  <!-- signpost -->
+  <g transform="translate(255,175)">
+    <line x1="0" y1="0" x2="0" y2="34" stroke="#FBF8F6" stroke-width="2.5"/>
+    <rect x="0" y="-4" width="34" height="12" rx="2" fill="#E05D8E"/>
+  </g>
+</svg>
