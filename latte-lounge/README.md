@@ -12,7 +12,7 @@ The site is a hand-built, dependency-free static site — vanilla HTML, CSS and 
 ## Pages
 
 | Page | File | Purpose |
-|---|---|---|
+
 | Home | `index.html` | Hero, current offers, and three signature menu items |
 | About | `about.html` | Brand story and core values |
 | Contact | `contact.html` | Hours, phone, address, map, and a contact form |
