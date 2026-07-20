@@ -1,64 +1,60 @@
 backend:
-  backend:
   name: git-gateway
   branch: main 
 
+
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
-site_url: https://boralugoda02.github.io/latte-lounge/
-display_url: https://boralugoda02.github.io/latte-lounge/
-logo_url: assets/images/logo-mark.png
+
+---
+
+display_url: "Latte Lounge Content Manager"
+
+logo_url: "/admin/logo.jpeg"
 
 collections:
   - name: "landing_page"
-    label: "Landing Page Content"
-    files:
-      - file: "assets/data/offers.json"
-        label: "Offers & Announcements"
-        name: "offers"
-        fields:
-          - {label: "Section Title", name: "title", widget: "string"}
-          - label: "Offers Cards"
-            name: "cards"
-            widget: "list"
-            fields:
-              - {label: "Card Heading", name: "heading", widget: "string"}
-              - {label: "Description", name: "description", widget: "text"}
-              - {label: "Category Tag", name: "tag", widget: "select", options: ["CAKE", "COFFEE", "SNACK"]}
+    label: " Landing Page" 
+    label_singular: "Landing Page Content"
+    file: "_content/landing.json"
+    fields:
+      - { label: "Main Title", name: "title", widget: "string" }
+      - { label: "Main Image", name: "image", widget: "image" }
+      - { label: "Main Description", name: "description", widget: "markdown" }
+      - label: "Offers", name: "offers", widget: "list", fields: [
+          { label: "Title", name: "offer_title", widget: "string" },
+          { label: "Description", name: "offer_desc", widget: "string" },
+          { label: "Icon", name: "offer_icon", widget: "string", description: "e.g. coffee, gift" }
+        ]
+      - label: "Announcements", name: "announcements", widget: "list", fields: [
+          { label: "Message", name: "message", widget: "string" },
+          { label: "Link (Optional)", name: "link", widget: "string" },
+          { label: "Date (Optional)", name: "date", widget: "date", required: false }
+        ]
 
   - name: "menu"
-    label: "Cafe Menu Items"
-    folder: "assets/data/menu"
+    label: " Cafe Menu" 
+    label_singular: "Menu Item"
+    folder: "_content/menu"
     create: true
     slug: "{{slug}}"
-    format: "json"
-    extension: "json"
     fields:
-      - {label: "Item Name", name: "title", widget: "string"}
-      - {label: "Price (LKR)", name: "price", widget: "number", value_type: "int"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Item Category", name: "category", widget: "select", options: ["CAKE", "COFFEE", "SNACK"]}
-      - {label: "Featured on Home Page", name: "featured", widget: "boolean", default: false}
+      - { label: "Item Name", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Cake", "Coffee", "Snack"] }
+      - { label: "Price", name: "price", widget: "string" }
+      - { label: "Featured Item?", name: "featured", widget: "boolean", default: false }
 
   - name: "settings"
-    label: "Site Settings"
-    files:
-      - file: "assets/data/content.json"
-        label: "General Settings"
-        name: "general"
-        fields:
-          - { label: "Hours (short, e.g. hero badge)", name: "hoursShort", widget: "string" }
-          - { label: "Hours (long, contact page)", name: "hoursLong", widget: "string" }
-          - { label: "Phone (display)", name: "phoneDisplay", widget: "string" }
-          - { label: "Phone (digits only, for tel: link, e.g. +94571234567)", name: "phoneHref", widget: "string" }
-          - { label: "Address line 1", name: "addressLine1", widget: "string" }
-          - { label: "Address line 2", name: "addressLine2", widget: "string" }
-          - { label: "Address line 3", name: "addressLine3", widget: "string" }
-          - { label: "Address (short, footer)", name: "addressShort", widget: "string" }
-          - { label: "Google Maps embed URL", name: "mapEmbedUrl", widget: "string" }
-          - label: "Social Links"
-            name: "socials"
-            widget: "object"
-            fields:
-              - { label: "Facebook URL", name: "facebook", widget: "string" }
-              - { label: "TikTok URL", name: "tiktok", widget: "string" }
+    label: " Site Settings" 
+    label_singular: "Global Settings"
+    file: "_content/settings.json"
+    fields:
+      - { label: "Site Name", name: "site_title", widget: "string", default: "Latte Lounge" }
+      - { label: "Header Style", name: "header_style", widget: "select", options: ["Light", "Dark", "Custom"] }
+      - { label: "Contact Email", name: "contact_email", widget: "string" }
+      - { label: "Social Links", name: "social_links", widget: "object", fields: [
+          { label: "Facebook", name: "facebook", widget: "string" },
+          { label: "Instagram", name: "instagram", widget: "string" }
+        ]
+      }

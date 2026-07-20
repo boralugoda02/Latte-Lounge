@@ -1,16 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Content Manager</title>
-  
-  
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-  <!-- Decap CMS script via official unpkg CDN -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
-</body>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latte Lounge Content Manager</title>
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    
+    <style>
+      
+      :root {
+        
+        --primary-color: #F8BBD0; 
+        
+        --dark-color: #212121;
+        
+        --bg-color: #212121;
+        
+        --text-color: #F8BBD0;
+        
+        --main-bg-color: #F8F9FA; 
+      }
+
+      
+      .nc-app-app, 
+      .nc-app-header-brand-logo,
+      .nc-app-header-brand-brandname,
+      .nc-netlifyIdentityWidget-button-text {
+        display: none !important;
+      }
+
+      /
+      .nc-app-header {
+        background-image: url('/admin/logo.jpeg') !important;
+        background-repeat: no-repeat !important;
+        background-size: 60px auto !important; 
+        background-position: left 20px center !important;
+        background-color: var(--dark-color) !important;
+        padding-left: 90px !important; 
+        height: 80px !important;
+        display: flex !important;
+        align-items: center !important;
+        color: #fff !important;
+        font-weight: bold !important;
+        font-size: 1.2rem !important;
+      }
+      
+      
+      .nc-app-sidebar {
+        background-color: var(--bg-color) !important;
+        color: var(--text-color) !important;
+      }
+      
+      .nc-app-sidebar-link {
+        color: var(--text-color) !important;
+      }
+      
+      .nc-app-sidebar-link:hover, 
+      .nc-app-sidebar-link-active {
+        background-color: #333 !important;
+        border-left: 4px solid var(--primary-color) !important;
+      }
+
+      
+      .nc-button,
+      .nc-submit-button,
+      .nc-publish-button {
+        background-color: var(--primary-color) !important;
+        color: var(--dark-color) !important;
+      }
+
+      /
+      .nc-mediaLibrary-grid-file-info {
+        background-color: #fff !important;
+        border-color: #eee !important;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    
+    
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
