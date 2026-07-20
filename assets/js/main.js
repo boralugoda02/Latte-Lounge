@@ -1,120 +1,135 @@
 /* =========================================================
-   Latte Lounge by 7's — main.js
-   Vanilla ES6. No global leaks — everything lives inside the
-   DOMContentLoaded scope below.
+   LATTE LOUNGE by 7's — main.js
+   Modular vanilla ES6. No global leaks: everything lives
+   inside the DOMContentLoaded listener / named functions.
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ---- Mobile navigation toggle ---- */
-  const initNavToggle = () => {
-    const toggle = document.querySelector('.nav-toggle');
-    const menu = document.querySelector('.nav-menu');
-    if (!toggle || !menu) return;
-
-    toggle.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    // Close the menu when a link is chosen (mobile)
-    menu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  };
-
-  /* ---- Active nav state based on current page ---- */
-  const initActiveNav = () => {
-    const path = window.location.pathname.split('/').pop() || 'index.html';
-    const current = path === '' ? 'index.html' : path;
-    document.querySelectorAll('.nav-menu a[data-nav]').forEach((link) => {
-      const linkPage = link.getAttribute('href');
-      if (linkPage === current || (current === 'index.html' && linkPage === 'index.html')) {
-        link.classList.add('is-active');
-        link.setAttribute('aria-current', 'page');
-      }
-    });
-  };
-
-  /* ---- Dynamic copyright year ---- */
-  const initFooterYear = () => {
-    const year = new Date().getFullYear();
-    document.querySelectorAll('[data-year]').forEach((el) => {
-      el.textContent = String(year);
-    });
-  };
-
-  /* ---- Dynamic "offer" dates for the Current Happenings cards ---- */
-  const initOfferDates = () => {
-    const formatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' });
-    const today = new Date();
-    const nodes = document.querySelectorAll('[data-offer-date]');
-
-    nodes.forEach((node) => {
-      const kind = node.getAttribute('data-offer-date');
-      if (kind === '1') {
-        const end = new Date(today);
-        end.setDate(today.getDate() + 6);
-        node.textContent = `Through ${formatter.format(end)}`;
-      } else if (kind === '2') {
-        node.textContent = 'Saturday & Sunday';
-      } else if (kind === '3') {
-        node.textContent = 'Daily, 6:00–10:00 AM';
-      }
-    });
-  };
-
-  /* ---- Contact form: prevent default, simulate submit, show toast ---- */
-  const initContactForm = () => {
-    const form = document.getElementById('contact-form');
-    const toast = document.getElementById('toast');
-    if (!form || !toast) return;
-
-    let toastTimer = null;
-
-    const showToast = () => {
-      toast.classList.add('is-visible');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
-        toast.classList.remove('is-visible');
-      }, 4000);
-    };
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalLabel = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
-
-      // Simulated network round-trip (fetch-style async pattern,
-      // ready to be swapped for a real endpoint later).
-      const simulateSubmit = () => new Promise((resolve) => {
-        setTimeout(resolve, 700);
-      });
-
-      simulateSubmit().then(() => {
-        showToast();
-        form.reset();
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalLabel;
-      });
-    });
-  };
-
-  initNavToggle();
-  initActiveNav();
-  initFooterYear();
-  initOfferDates();
+  initMobileNav();
+  setActiveNavLink();
+  setFooterYear();
   initContactForm();
-
 });
+
+/**
+ * Mobile hamburger menu: toggles the nav-menu panel and
+ * keeps aria-expanded in sync for screen readers.
+ */
+function initMobileNav() {
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navMenu');
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close the menu after a link is chosen (mobile only).
+  menu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Close on Escape for keyboard users.
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu.classList.contains('is-open')) {
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+  });
+}
+
+/**
+ * Applies aria-current="page" to the nav link matching the
+ * current document location, so the active state is always
+ * derived from window.location rather than hardcoded per page.
+ */
+function setActiveNavLink() {
+  const links = document.querySelectorAll('[data-nav-link]');
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+
+  links.forEach((link) => {
+    const linkPath = link.getAttribute('href');
+    if (linkPath === currentPath) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
+/** Writes the current year into the footer copyright line. */
+function setFooterYear() {
+  const yearEl = document.getElementById('copyrightYear');
+  if (yearEl) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
+}
+
+/**
+ * Contact form: prevents the default full-page submit,
+ * runs a lightweight simulated send, then shows a success
+ * toast. HTML5 attributes (required, type="email") handle
+ * baseline validation before this ever runs.
+ */
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const submitButton = form.querySelector('.form-submit');
+    const originalLabel = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending…';
+
+    simulateSend(new FormData(form))
+      .then(() => {
+        showToast("Message sent — we'll get back to you soon.");
+        form.reset();
+      })
+      .catch(() => {
+        showToast('Something went wrong. Please try again.');
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      });
+  });
+}
+
+/**
+ * Simulates a network request using fetch-style Promise
+ * semantics. Swap the resolve() body for a real fetch() call
+ * to a form backend when one is available.
+ */
+function simulateSend(formData) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve({ ok: true, data: Object.fromEntries(formData) }), 600);
+  });
+}
+
+/** Shows the toast notification for a few seconds, then hides it. */
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toastMessage');
+  if (!toast) return;
+
+  if (toastMessage) toastMessage.textContent = message;
+
+  toast.classList.add('is-visible');
+  window.clearTimeout(showToast._timer);
+  showToast._timer = window.setTimeout(() => {
+    toast.classList.remove('is-visible');
+  }, 4000);
+}

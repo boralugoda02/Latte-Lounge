@@ -1,0 +1,28 @@
+{
+  "offers": [
+    {
+      "tag": "Coffee",
+      "tagClass": "tag-coffee",
+      "title": "Seasonal Sri Lankan Spiced Coffee",
+      "description": "Estate-grown beans slow-brewed with cardamom, clove and a touch of jaggery — the way the hill country warms up on a misty morning.",
+      "dateLabel": "Available through end of July",
+      "dateISO": "2026-07-19"
+    },
+    {
+      "tag": "Cake",
+      "tagClass": "tag-cake",
+      "title": "Weekend High Tea Platter for Two",
+      "description": "Love cake, butter cookies and short eats served with a pot of Uva tea — a proper pause for two, every Saturday and Sunday.",
+      "dateLabel": "Weekends only",
+      "dateISO": "2026-07-19"
+    },
+    {
+      "tag": "Snack",
+      "tagClass": "tag-snack",
+      "title": "Traveler's Express Breakfast Deal",
+      "description": "Milk toast, an egg roti and your choice of coffee or tea, plated fast for anyone still tackling the hairpin bends ahead.",
+      "dateLabel": "Every morning, 7–10 AM",
+      "dateISO": "2026-07-19"
+    }
+  ]
+}

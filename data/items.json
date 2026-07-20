@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "name": "7's House Latte",
+      "price": "Rs. 1,250",
+      "tag": "Coffee",
+      "tagClass": "tag-coffee",
+      "description": "Double espresso pulled from single-estate Uva beans, steamed milk, finished with a leaf of latte art.",
+      "image": "assets/images/item-latte.jpg"
+    },
+    {
+      "name": "Hill Country Love Cake",
+      "price": "Rs. 950",
+      "tag": "Cake",
+      "tagClass": "tag-cake",
+      "description": "Cashews, semolina and rosewater, baked slow the traditional way and cut generously for the road ahead.",
+      "image": "assets/images/item-lovecake.jpg"
+    },
+    {
+      "name": "Spiced Fish Cutlet Snack Box",
+      "price": "Rs. 750",
+      "tag": "Snack",
+      "tagClass": "tag-snack",
+      "description": "Four crisp fish cutlets, a wedge of lime and house chili sauce — built to eat with one hand at a rest stop.",
+      "image": "assets/images/item-cutlets.jpg"
+    }
+  ]
+}
