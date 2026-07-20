@@ -16,12 +16,12 @@
       // Register preview style for the preview panel
       CMS.registerPreviewStyle('admin-theme.css');
       
-      // Netlify Identity Login redirect
+      // Clean Security Fallback: If unauthorized user closes the login modal, bounce them out
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", user => {
           if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/dashboard/";
+            window.netlifyIdentity.on("close", () => {
+              document.location.href = "/";
             });
           }
         });

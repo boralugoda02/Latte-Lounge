@@ -2,20 +2,58 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "assets/images/uploads"
-public_folder: "/assets/images/uploads"
-
-display_url: "Latte Lounge Content Manager"
+# Dashboard Logo Settings
 logo_url: "/dashboard/logo.png"
 
+media_folder: assets/images
+public_folder: /assets/images
+
 collections:
-  - name: "landing_page"
-    label: "Landing Page"
-    label_singular: "Landing Page Content"
+  - name: landing_page
+    label: Landing Page Content
     files:
-      - file: "content/landing.json"
-        label: "Main Content"
-        name: "main_content"
+      - file: assets/data/offers.json
+        label: Offers & Announcements
+        name: offers
         fields:
-          - { label: "Hero Title", name: "hero_title", widget: "string" }
-          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "string" }
+          - { label: "Section Title", name: "title", widget: string }
+          - label: "Offers Cards"
+            name: "cards"
+            widget: list
+            fields:
+              - { label: "Card Heading", name: "heading", widget: string }
+              - { label: "Description", name: "description", widget: text }
+              - { label: "Category Tag", name: "tag", widget: select, options: ["CAKE", "COFFEE", "SNACK"] }
+  - name: menu
+    label: Cafe Menu Items
+    file: assets/data_menu/menu.json
+    fields:
+      - label: Menu List
+        name: items
+        widget: list
+        fields:
+          - { label: "Item Name", name: "title", widget: string }
+          - { label: "Price (LKR)", name: "price", widget: number, value_type: int }
+          - { label: "Description", name: "description", widget: text }
+          - { label: "Item Category", name: "category", widget: select, options: ["CAKE", "COFFEE", "SNACK"] }
+          - { label: "Featured Status", name: "featured", widget: boolean, default: false }
+  - name: settings
+    label: Site Settings
+    files:
+      - file: assets/data/content.json
+        label: "General Settings"
+        name: "general"
+        fields:
+          - { label: "Hours Short", name: "hoursShort", widget: string }
+          - { label: "Hours Long", name: "hoursLong", widget: string }
+          - { label: "Phone Display", name: "phoneDisplay", widget: string }
+          - { label: "Phone Href", name: "phoneHref", widget: string }
+          - { label: "Address Line 1", name: "addressLine1", widget: string }
+          - { label: "Address Line 2", name: "addressLine2", widget: string }
+          - { label: "Address Line 3", name: "addressLine3", widget: string }
+          - { label: "Address Short", name: "addressShort", widget: string }
+          - { label: "Google Maps Embed URL", name: "mapEmbedUrl", widget: string }
+          - label: "Social Links", name: "socials", widget: object, fields: [
+              { label: "Facebook URL", name: "facebook", widget: string },
+              { label: "TikTok URL", name: "tiktok", widget: string }
+            ] }
