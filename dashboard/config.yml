@@ -53,7 +53,9 @@ collections:
           - { label: "Address Line 3", name: "addressLine3", widget: string }
           - { label: "Address Short", name: "addressShort", widget: string }
           - { label: "Google Maps Embed URL", name: "mapEmbedUrl", widget: string }
-          - label: "Social Links", name: "socials", widget: object, fields: [
-              { label: "Facebook URL", name: "facebook", widget: string },
-              { label: "TikTok URL", name: "tiktok", widget: string }
-            ] }
+          - label: "Social Links"
+            name: "socials"
+            widget: object
+            fields:
+              - { label: "Facebook URL", name: "facebook", widget: string }
+              - { label: "TikTok URL", name: "tiktok", widget: string }
