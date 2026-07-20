@@ -1,122 +1,392 @@
 /* =========================================================
-   LATTE LOUNGE by 7's — admin-theme.css
-   Universal design system branding overrides for Decap CMS.
-   Primary Brand Pink: #E05D8E
-   Secondary Brand Black: #000000
+   LATTE LOUNGE — admin-theme.css
+   Premium Administrative UI Skin for Decap CMS
+   Official Brand Palette: Pink (#E05D8E) & Black (#000000)
    ========================================================= */
 
 :root {
   --brand-pink: #E05D8E;
   --brand-black: #000000;
-  --bg-primary: #000000;
-  --bg-secondary: #121212;
-  --text-main: #FBF8F6;
-  --text-muted: #AAAAAA;
-  --border-color: #262626;
-  --brand-pink-hover: #B8436A;
+  --surface-pure-white: #FFFFFF;
+  --surface-off-white: #FBF8F6;
+  --surface-dark-gray: #121212;
+  --border-light: #E5E5E5;
+  --border-dark: #262626;
+  --text-main: #000000;
+  --text-muted: #555555;
+  
+  /* Shared transitions & rounding */
+  --radius-sm: 4px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Override Decap CMS Top Header */
-.nc-app-header {
+/* ---------- Global Body & Layout Overrides ---------- */
+body, 
+#nc-root {
+  background-color: var(--surface-off-white) !important;
+  color: var(--text-main) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* Strip emojis & customize headers professionally */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* ---------- 1. Login Screen Overrides ---------- */
+.nc-github-authentication-page,
+.css-109009m-LoginPage,
+div[class*="LoginPage"] {
+  background-color: var(--surface-off-white) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100vh !important;
+}
+
+/* Remove default Netlify / Decap branding images or svgs */
+.nc-github-authentication-page svg,
+.nc-github-authentication-page img,
+.css-109009m-LoginPage svg,
+.css-109009m-LoginPage img,
+div[class*="LoginPageContainer"] svg,
+div[class*="LoginPageContainer"] img,
+div[class*="LoginPageContainer"]::before,
+div[class*="LoginPageContainer"]::after {
+  display: none !important;
+}
+
+/* Stylized Minimal Login Card */
+.nc-github-authentication-page > div,
+.css-154w2e5-LoginPageContainer,
+div[class*="LoginPageContainer"] {
+  background-color: var(--surface-pure-white) !important;
+  border: 1px solid var(--border-light) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 3rem 2.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 420px !important;
+}
+
+/* Custom text header in place of branding logo */
+.css-154w2e5-LoginPageContainer::before,
+div[class*="LoginPageContainer"]::before {
+  content: "Latte Lounge" !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 1.85rem !important;
+  font-weight: 700 !important;
+  color: var(--brand-black) !important;
+  margin-bottom: 0.1rem !important;
+  display: block !important;
+}
+.css-154w2e5-LoginPageContainer::after,
+div[class*="LoginPageContainer"]::after {
+  content: "CONTENT MANAGER" !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  color: var(--brand-pink) !important;
+  margin-bottom: 2.2rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  display: block !important;
+}
+
+/* Login Button */
+.nc-github-authentication-page button,
+.css-8339f4-Button-button-default-Button,
+.css-1698z6k-Button-button-default-Button-button-medium-LoginPageButton,
+button[class*="LoginPageButton"] {
+  background-color: var(--brand-pink) !important;
+  background-image: none !important;
+  color: var(--surface-pure-white) !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  padding: 0.75rem 2rem !important;
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  cursor: pointer !important;
+}
+.nc-github-authentication-page button:hover,
+.css-8339f4-Button-button-default-Button:hover,
+.css-1698z6k-Button-button-default-Button-button-medium-LoginPageButton:hover,
+button[class*="LoginPageButton"]:hover {
   background-color: var(--brand-black) !important;
+  color: var(--surface-off-white) !important;
+}
+
+
+/* ---------- 2. Top Navigation Header Overrides ---------- */
+.nc-app-layout-header,
+.css-1f9g3m5-AppLayoutHeader,
+header[class*="AppLayoutHeader"] {
+  background-color: var(--brand-black) !important;
+  color: var(--surface-off-white) !important;
   border-bottom: 2px solid var(--brand-pink) !important;
-  color: var(--text-main) !important;
+  box-shadow: none !important;
+  height: 56px !important;
+  padding: 0 1.5rem !important;
 }
 
-/* Header logo and buttons */
-.nc-app-header-brand-logo,
-.nc-app-header-brand-brandname {
-  color: var(--brand-pink) !important;
-}
-
-.nc-app-header button {
-  background-color: var(--brand-pink) !important;
-  color: var(--brand-black) !important;
-  font-weight: 700 !important;
-}
-.nc-app-header button:hover {
-  background-color: var(--brand-pink-hover) !important;
-}
-
-/* Sidebar Styling */
-.nc-app-sidebar {
-  background-color: var(--bg-secondary) !important;
-  border-right: 1px solid var(--border-color) !important;
-}
-
-.nc-app-sidebar-link {
-  color: var(--text-muted) !important;
+/* Top bar text & menu labels */
+.nc-app-layout-header a,
+.nc-app-layout-header span,
+.nc-app-layout-header button,
+.css-1f9g3m5-AppLayoutHeader a,
+.css-1f9g3m5-AppLayoutHeader span,
+.css-1f9g3m5-AppLayoutHeader button,
+header[class*="AppLayoutHeader"] a,
+header[class*="AppLayoutHeader"] span,
+header[class*="AppLayoutHeader"] button {
+  color: var(--surface-off-white) !important;
   font-weight: 500 !important;
-  transition: all 0.2s ease !important;
 }
 
-.nc-app-sidebar-link-active,
-.nc-app-sidebar-link:hover {
+/* Active and Hover states for Top bar Links */
+.css-1n7k7q-AppLayoutHeaderLink,
+a[class*="AppLayoutHeaderLink"] {
+  border-bottom: 3px solid transparent !important;
+  transition: all 0.2s var(--ease) !important;
+}
+.css-1n7k7q-AppLayoutHeaderLink:hover,
+.css-1n7k7q-AppLayoutHeaderLink-active,
+a[class*="AppLayoutHeaderLink"]:hover,
+a[class*="AppLayoutHeaderLink"][class*="active"] {
   color: var(--brand-pink) !important;
-  background-color: var(--bg-primary) !important;
-  border-left: 4px solid var(--brand-pink) !important;
+  border-bottom-color: var(--brand-pink) !important;
 }
 
-/* Main Content Panels & Containers */
-.nc-app-content-panel {
-  background-color: var(--bg-primary) !important;
+/* Header User Profile Icon */
+.css-1f9g3m5-AppLayoutHeader img,
+header[class*="AppLayoutHeader"] img {
+  border: 1px solid var(--brand-pink) !important;
+}
+
+
+/* ---------- 3. Sidebar Navigation Container Overrides ---------- */
+.nc-app-layout-sidebar,
+.css-10x1vwa-SidebarContainer,
+aside[class*="SidebarContainer"] {
+  background-color: var(--surface-off-white) !important;
+  border-right: 1px solid var(--border-light) !important;
+  box-shadow: none !important;
+  padding-top: 1.5rem !important;
+  padding-inline: 1rem !important;
+}
+
+/* Sidebar navigation links */
+.nc-app-layout-sidebar a,
+.css-10x1vwa-SidebarContainer a,
+aside[class*="SidebarContainer"] a {
   color: var(--text-main) !important;
+  background-color: transparent !important;
+  border-left: 3px solid transparent !important;
+  font-weight: 500 !important;
+  border-radius: 0 4px 4px 0 !important;
+  padding: 0.65rem 1rem !important;
+  margin-bottom: 0.35rem !important;
+  transition: all 0.18s var(--ease) !important;
 }
 
-.nc-collectionPage-sidebar {
-  background-color: var(--bg-secondary) !important;
+/* Hover state sidebar links */
+.nc-app-layout-sidebar a:hover,
+.css-10x1vwa-SidebarContainer a:hover,
+aside[class*="SidebarContainer"] a:hover {
+  color: var(--brand-pink) !important;
+  background-color: rgba(224, 93, 142, 0.04) !important;
+  border-left-color: rgba(224, 93, 142, 0.3) !important;
 }
 
-/* Buttons */
-.nc-button,
-.nc-submit-button,
-.nc-publish-button,
-button[class*="Button"] {
-  background-color: var(--brand-pink) !important;
+/* Active state collection links */
+.nc-app-layout-sidebar a[class*="active"],
+.nc-app-layout-sidebar a[aria-current="page"],
+.css-10x1vwa-SidebarContainer a[class*="active"],
+aside[class*="SidebarContainer"] a[class*="active"],
+.css-10x1vwa-SidebarContainer a[aria-current="page"],
+aside[class*="SidebarContainer"] a[aria-current="page"] {
   color: var(--brand-black) !important;
-  border-color: var(--brand-pink) !important;
+  background-color: var(--surface-pure-white) !important;
+  border-left: 3px solid var(--brand-pink) !important;
   font-weight: 700 !important;
-  border-radius: 4px !important;
-  transition: background-color 0.2s ease !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
 }
 
-.nc-button:hover,
-.nc-submit-button:hover,
-.nc-publish-button:hover,
-button[class*="Button"]:hover {
-  background-color: var(--brand-pink-hover) !important;
-  border-color: var(--brand-pink-hover) !important;
+
+/* ---------- 4. Primary Content Action Buttons ---------- */
+.nc-collection-header-button,
+.css-5b583m-Button-button-default-Button-button-medium-CollectionHeaderButton,
+button[class*="CollectionHeaderButton"],
+button[class*="PublishButton"],
+button[class*="SaveButton"],
+button[aria-label="Publish changes"],
+button[class*="Button-button-default-Button-button-medium-PublishButton"] {
+  background-color: var(--brand-pink) !important;
+  color: var(--surface-pure-white) !important;
+  border: 1px solid var(--brand-pink) !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background-image: none !important;
+  padding: 0.6rem 1.2rem !important;
+  transition: all 0.2s var(--ease) !important;
 }
 
-/* Text Fields, Sidebar Fields and Inputs */
-input, select, textarea,
+.nc-collection-header-button:hover,
+.css-5b583m-Button-button-default-Button-button-medium-CollectionHeaderButton:hover,
+button[class*="CollectionHeaderButton"]:hover,
+button[class*="PublishButton"]:hover,
+button[class*="SaveButton"]:hover,
+button[aria-label="Publish changes"]:hover {
+  background-color: var(--brand-black) !important;
+  border-color: var(--brand-black) !important;
+  color: var(--surface-off-white) !important;
+}
+
+/* Caret Dropdowns on buttons */
+.css-1vpx9f6-Icon-icon-caretDown-Caret-Button-caretIcon-CollectionHeaderButtonCaret,
+i[class*="Caret"] {
+  color: var(--surface-pure-white) !important;
+}
+
+
+/* ---------- 5. Form Input Cards & Fields ---------- */
+/* Container panes for controls */
+.nc-control-pane-control,
+.css-17079ko-ControlContainer,
+div[class*="ControlContainer"] {
+  background-color: var(--surface-pure-white) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: none !important;
+  padding: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Fields & textareas inside control panes */
+.nc-control-pane-control input,
+.nc-control-pane-control select,
+.nc-control-pane-control textarea,
+.css-17079ko-ControlContainer input,
+.css-17079ko-ControlContainer select,
+.css-17079ko-ControlContainer textarea,
 div[class*="ControlContainer"] input,
 div[class*="ControlContainer"] select,
 div[class*="ControlContainer"] textarea {
-  background-color: var(--bg-secondary) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.7rem 0.9rem !important;
+  background-color: var(--surface-pure-white) !important;
   color: var(--text-main) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 4px !important;
+  box-shadow: none !important;
+  font-size: 0.95rem !important;
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease) !important;
 }
 
-input:focus, select:focus, textarea:focus {
+/* Active focus states */
+.nc-control-pane-control input:focus,
+.nc-control-pane-control select:focus,
+.nc-control-pane-control textarea:focus,
+.css-17079ko-ControlContainer input:focus,
+.css-17079ko-ControlContainer select:focus,
+.css-17079ko-ControlContainer textarea:focus,
+div[class*="ControlContainer"] input:focus,
+div[class*="ControlContainer"] select:focus,
+div[class*="ControlContainer"] textarea:focus {
   border-color: var(--brand-pink) !important;
+  box-shadow: 0 0 0 2px rgba(224, 93, 142, 0.15) !important;
   outline: none !important;
 }
 
-/* Card overrides */
-div[class*="Card"] {
-  background-color: var(--bg-secondary) !important;
-  border: 1px solid var(--border-color) !important;
+/* Form field label headings */
+.css-11jgnx4-Label,
+label[class*="Label"] {
   color: var(--text-main) !important;
+  font-weight: 600 !important;
+  font-size: 0.88rem !important;
+  letter-spacing: 0.01em !important;
+  margin-bottom: 0.5rem !important;
 }
 
+
+/* ---------- 6. General Content Workspace Overrides ---------- */
+/* App main canvas and layout containers */
+.nc-app-layout-main,
+.css-193x47c-AppLayoutContent,
+div[class*="AppLayoutContent"] {
+  background-color: var(--surface-off-white) !important;
+}
+
+/* Inner panels */
+.nc-app-content-panel,
+.css-1nzoft-AppContentPanel,
+div[class*="AppContentPanel"] {
+  background-color: var(--surface-pure-white) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01) !important;
+  padding: 2rem !important;
+}
+
+/* Secondary list/card collection cards */
+.css-15bwsfe-Card,
+div[class*="Card"] {
+  background-color: var(--surface-pure-white) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: none !important;
+  transition: all 0.2s var(--ease) !important;
+}
 div[class*="Card"]:hover {
   border-color: var(--brand-pink) !important;
+  box-shadow: 0 4px 12px rgba(224, 93, 142, 0.04) !important;
 }
 
-/* Markdown and preview pane styling */
-.nc-previewPane-frame {
-  background-color: var(--bg-primary) !important;
+/* Secondary actions and Cancel / Back button variants */
+button[class*="CancelButton"],
+button[class*="BackButton"],
+button[class*="Button-button-default-Button-button-light-CancelButton"],
+button[class*="Button-button-default-Button-button-medium-CancelButton"] {
+  background-color: var(--surface-off-white) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.6rem 1.2rem !important;
+  font-weight: 500 !important;
+  transition: all 0.2s var(--ease) !important;
+}
+button[class*="CancelButton"]:hover,
+button[class*="BackButton"]:hover,
+button[class*="Button-button-default-Button-button-light-CancelButton"]:hover,
+button[class*="Button-button-default-Button-button-medium-CancelButton"]:hover {
+  background-color: var(--border-light) !important;
   color: var(--text-main) !important;
+  border-color: var(--border-light) !important;
+}
+
+/* Preview Panel frame */
+.nc-previewPane-frame,
+iframe[class*="PreviewPane"] {
+  background-color: var(--surface-pure-white) !important;
+  border-left: 1px solid var(--border-light) !important;
+}
+
+/* Selection boxes and tables */
+table, 
+th, 
+td {
+  border-color: var(--border-light) !important;
+}
+th {
+  background-color: var(--surface-off-white) !important;
+  color: var(--text-main) !important;
+  font-weight: 600 !important;
 }

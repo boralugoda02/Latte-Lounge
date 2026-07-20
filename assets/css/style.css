@@ -46,7 +46,7 @@
   /* ---- Brand palette ---- */
   --pink: var(--brand-accent);
   --black: var(--text-main);
-  --green: #3A503C;
+  --green: #81C784;
   --cream: var(--bg-primary);
   --text-light: #FBF8F6;
 
@@ -192,16 +192,16 @@ h3 { font-size: var(--step-h3); }
 
 .btn-outline {
   background: transparent;
-  color: var(--black);
-  border-color: var(--black);
+  color: var(--text-main);
+  border-color: var(--text-main);
 }
-.btn-outline:hover { background: var(--black); color: var(--text-light); }
+.btn-outline:hover { background: var(--text-main); color: var(--bg-primary); }
 
 .btn-outline.on-dark {
   color: var(--text-light);
   border-color: var(--text-light);
 }
-.btn-outline.on-dark:hover { background: var(--text-light); color: var(--black); }
+.btn-outline.on-dark:hover { background: var(--text-light); color: #000000; }
 
 /* ---------- Header / Nav ---------- */
 .site-header {
@@ -320,7 +320,7 @@ h3 { font-size: var(--step-h3); }
   position: relative;
   overflow: hidden;
   padding-block: clamp(3rem, 8vw, 6rem) clamp(3.5rem, 9vw, 7rem);
-  background: var(--black);
+  background: #000000;
   color: var(--text-light);
 }
 
@@ -463,7 +463,7 @@ h3 { font-size: var(--step-h3); }
   color: var(--pink-deep);
 }
 .tag-chip.tag-cake { background: var(--pink-tint); color: var(--pink-deep); }
-.tag-chip.tag-coffee { background: var(--black); color: var(--text-light); }
+.tag-chip.tag-coffee { background: var(--text-main); color: var(--bg-primary); }
 .tag-chip.tag-snack { background: var(--green-tint); color: var(--green); }
 
 .offer-card time {
@@ -510,12 +510,12 @@ h3 { font-size: var(--step-h3); }
 .value-icon {
   width: 52px; height: 52px;
   border-radius: 50%;
-  background: var(--black);
+  background: var(--text-main);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.value-icon svg { width: 24px; height: 24px; stroke: var(--text-light); }
+.value-icon svg { width: 24px; height: 24px; stroke: var(--bg-primary); }
 
 /* ---------- Story (about page) ---------- */
 .story-grid {
@@ -621,7 +621,7 @@ h3 { font-size: var(--step-h3); }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  background: var(--black);
+  background: #000000;
   color: var(--text-light);
   padding-block: clamp(2.5rem, 5vw, 3.5rem) 1.5rem;
 }
@@ -737,8 +737,8 @@ h3 { font-size: var(--step-h3); }
   position: absolute;
   top: -2px;
   right: -2px;
-  background: var(--black);
-  color: var(--text-light);
+  background: var(--text-main);
+  color: var(--bg-primary);
   border: 2px solid var(--cream);
   border-radius: 50%;
   width: 24px;
@@ -983,7 +983,7 @@ h3 { font-size: var(--step-h3); }
   background: var(--cream-deep);
 }
 .newsletter-card {
-  background: var(--black);
+  background: #000000;
   color: var(--text-light);
   border-radius: var(--radius-md);
   padding: clamp(2rem, 5vw, 3.5rem);
