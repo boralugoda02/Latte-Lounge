@@ -4,85 +4,101 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Latte Lounge Content Manager</title>
-    <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-    
     <style>
-      
-      :root {
-        
-        --primary-color: #F8BBD0; 
-        
-        --dark-color: #212121;
-        
-        --bg-color: #212121;
-        
-        --text-color: #F8BBD0;
-        
-        --main-bg-color: #F8F9FA; 
+      body {
+        background-color: #FFF0F5 !important;
       }
-
-      
-      .nc-app-app, 
-      .nc-app-header-brand-logo,
-      .nc-app-header-brand-brandname,
-      .nc-netlifyIdentityWidget-button-text {
+      #nc-root header, 
+      nav[class*="AppHeader"] {
+        background-color: #1A1A1A !important;
+        border-bottom: 3px solid #FF8DA1 !important;
+        height: 70px !important;
+      }
+      nav[class*="AppHeader"]::before {
+        content: " LATTE LOUNGE BY 7's";
+        color: #FF8DA1 !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 800;
+        font-size: 1.3rem;
+        letter-spacing: 1.5px;
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+      nav[class*="AppHeader"] a, 
+      nav[class*="AppHeader"] div[class*="Logo"] {
         display: none !important;
       }
-
-      /
-      .nc-app-header {
-        background-image: url('/admin/logo.jpeg') !important;
-        background-repeat: no-repeat !important;
-        background-size: 60px auto !important; 
-        background-position: left 20px center !important;
-        background-color: var(--dark-color) !important;
-        padding-left: 90px !important; 
-        height: 80px !important;
-        display: flex !important;
-        align-items: center !important;
-        color: #fff !important;
+      aside[class*="Sidebar"], 
+      div[class*="SidebarContainer"] {
+        background-color: #111111 !important;
+        box-shadow: 3px 0 15px rgba(0,0,0,0.2) !important;
+      }
+      aside[class*="Sidebar"] h2 {
+        color: #FF8DA1 !important;
         font-weight: bold !important;
-        font-size: 1.2rem !important;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
       }
-      
-      
-      .nc-app-sidebar {
-        background-color: var(--bg-color) !important;
-        color: var(--text-color) !important;
+      aside[class*="Sidebar"] a {
+        color: #E0E0E0 !important;
+        border-radius: 8px !important;
+        margin: 4px 8px !important;
+        transition: all 0.3s ease !important;
       }
-      
-      .nc-app-sidebar-link {
-        color: var(--text-color) !important;
+      aside[class*="Sidebar"] a:hover {
+        background-color: #262626 !important;
+        color: #FF8DA1 !important;
       }
-      
-      .nc-app-sidebar-link:hover, 
-      .nc-app-sidebar-link-active {
-        background-color: #333 !important;
-        border-left: 4px solid var(--primary-color) !important;
+      aside[class*="Sidebar"] a[class*="active"],
+      aside[class*="Sidebar"] a:active {
+        background-color: #FF8DA1 !important;
+        color: #111111 !important;
+        font-weight: bold !important;
+        box-shadow: 0 4px 12px rgba(255, 141, 161, 0.3) !important;
       }
-
-      
-      .nc-button,
-      .nc-submit-button,
-      .nc-publish-button {
-        background-color: var(--primary-color) !important;
-        color: var(--dark-color) !important;
+      button[class*="Button"], 
+      a[class*="Button"],
+      div[class*="QuickAdd"] button {
+        background-color: #111111 !important;
+        color: #FF8DA1 !important;
+        border: 2px solid #FF8DA1 !important;
+        border-radius: 30px !important;
+        font-weight: bold !important;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
       }
-
-      /
-      .nc-mediaLibrary-grid-file-info {
-        background-color: #fff !important;
-        border-color: #eee !important;
+      button[class*="Button"]:hover {
+        background-color: #FF8DA1 !important;
+        color: #111111 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 141, 161, 0.4) !important;
+      }
+      div[class*="CollectionTop"] {
+        background: white !important;
+        border-radius: 16px !important;
+        padding: 24px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04) !important;
+        border: 1px solid #FFE4E1 !important;
+      }
+      div[class*="CollectionTop"] h1 {
+        color: #111111 !important;
+        font-weight: 800 !important;
+      }
+      #netlify-identity-widget {
+        font-family: sans-serif;
+      }
+      .nc-netlifyIdentityWidget-button {
+        background-color: #111111 !important;
+        color: #FF8DA1 !important;
+        border: 1px solid #FF8DA1 !important;
       }
     </style>
   </head>
   <body>
-    
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    
-    
     <script>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", user => {
