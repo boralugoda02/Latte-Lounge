@@ -39,7 +39,7 @@ tokens, and small vanilla JS modules that keep the interface honest.
 ## Live Site
 
 * **Live Website:** (https://cool-dodol-d1bbc7.netlify.app)
-* **Admin Dashboard (CMS):** (https://cool-dodol-d1bbc7.netlify.app/admin/)
+* **Admin Dashboard (CMS):** (https://cool-dodol-d1bbc7.netlify.app/dashboard/))
 
 
 ## Project Structure
