@@ -44,37 +44,51 @@ tokens, and small vanilla JS modules that keep the interface honest.
 
 ## Project Structure
 
-```
-.
-├── index.html            # Home — hero, current happenings, signature items
-├── about.html             # Our Story — brand story and values
-├── contact.html            # Visit & Contact — hours, map, contact form
-├── admin/
-│   ├── index.html          # CMS admin dashboard (Sveltia CMS)
-│   └── config.yml           # CMS collections — maps to the /data files
-├── data/
-│   ├── offers.json          # Homepage "Current Happenings" cards
-│   ├── items.json           # Homepage signature menu items
-│   └── settings.json        # Hours, phone, address, map, social links
-├── assets/
-│   ├── css/
-│   │   └── style.css       # Design tokens + all component styles
-│   ├── js/
-│   │   ├── main.js          # Nav toggle, active-link state, form handling
-│   │   └── content.js        # Fetches /data JSON and renders it into the page
-│   └── images/
-│       ├── logo.png          # Full logo (footer)
-│       ├── logo-mark.png      # Cropped emblem (nav, favicon source)
-│       ├── favicon.png
-│       ├── hero-cozy.jpg
-│       ├── story-writing.jpg
-│       ├── item-latte.jpg
-│       ├── item-lovecake.jpg
-│       └── item-cutlets.jpg
-├── .nojekyll               # Tells GitHub Pages to serve files as-is
+├── about.html
+├── assets
+│   ├── css
+│   │   └── style.css
+│   ├── data
+│   │   ├── content.json
+│   │   └── offers.json
+│   ├── data_menu
+│   │   └── menu.json
+│   ├── images
+│   │   ├── about-illustration.svg
+│   │   ├── about-lifestyle.png
+│   │   ├── about-placeholder.jpg
+│   │   ├── cake-featured.png
+│   │   ├── coffee-featured.png
+│   │   ├── emblem-crop.png
+│   │   ├── favicon.png
+│   │   ├── hero-cozy.jpg
+│   │   ├── hero-illustration.svg
+│   │   ├── hero-placeholder.jpg
+│   │   ├── item-cake.svg
+│   │   ├── item-cutlets.jpg
+│   │   ├── item-cutlets.svg
+│   │   ├── item-latte.jpg
+│   │   ├── item-latte.svg
+│   │   ├── item-lovecake.jpg
+│   │   ├── logo-dark.jpeg
+│   │   ├── logo-light.jpeg
+│   │   ├── logo-mark.png
+│   │   ├── logo.png
+│   │   ├── snack-featured.png
+│   │   ├── story-writing.jpg
+│   │   └── texture-beans.png
+│   └── js
+│       ├── content.js
+│       ├── main.js
+│       └── theme-engine.js
+├── contact.html
+├── dashboard
+│   ├── admin-theme.css
+│   ├── config.yml
+│   └── index.html
+├── index.html
 ├── LICENSE
 └── README.md
-```
 
 > **Logo:** the real brand mark is in `assets/images/logo.png` (full
 > lockup, used in the footer) and `assets/images/logo-mark.png` (cropped
