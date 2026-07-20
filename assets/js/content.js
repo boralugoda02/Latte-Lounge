@@ -50,44 +50,33 @@ async function renderOffers() {
   }
 }
 
-/** Fetches menu items from assets/data/menu/ via GitHub API or static assets/data/menu.json fallback */
+/** Fetches menu items from assets/data_menu/menu.json */
 async function fetchMenuItems() {
-  // Try querying GitHub Content API first to fetch dynamic files
   try {
-    const repo = 'boralugoda02/latte-lounge';
-    const response = await fetch(`https://api.github.com/repos/${repo}/contents/assets/data/menu`, {
-      headers: { Accept: 'application/vnd.github.v3+json' }
-    });
-    if (response.ok) {
-      const files = await response.json();
-      const jsonFiles = files.filter(f => f.name.endsWith('.json'));
-      const items = await Promise.all(jsonFiles.map(async (file) => {
-        const itemRes = await fetch(file.download_url);
-        return itemRes.json();
-      }));
-      if (items.length > 0) return items;
-    }
+    const data = await loadJSON('assets/data_menu/menu.json');
+    return data.items || [];
   } catch (err) {
-    console.warn('GitHub Contents API check failed, trying static menu.json fallback:', err);
+    console.warn('Failed to load menu from assets/data_menu/menu.json, trying fallbacks:', err);
   }
 
   // Fallback 1: assets/data/menu.json
   try {
-    return await loadJSON('assets/data/menu.json');
+    const data = await loadJSON('assets/data/menu.json');
+    if (Array.isArray(data)) return data;
+    return data.items || [];
   } catch (err) {
-    console.warn('Static menu.json fetch failed, trying root data/items.json:', err);
+    console.warn('Fallback static menu.json fetch failed, trying root data/items.json:', err);
   }
 
   // Fallback 2: data/items.json
   try {
     const data = await loadJSON('data/items.json');
-    // Map items from old structure to new structure
     return (data.items || []).map(item => ({
       title: item.name,
       price: parseInt(String(item.price).replace(/[^0-9]/g, ''), 10) || 750,
       description: item.description,
       category: String(item.tag).toUpperCase(),
-      featured: true
+      featured: item.featured ?? true
     }));
   } catch (err) {
     console.error('All menu loading fallback operations failed:', err);

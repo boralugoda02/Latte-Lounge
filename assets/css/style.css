@@ -6,23 +6,63 @@
    bends, signposts.
    ========================================================= */
 
-:root {
-  /* ---- Brand palette (from brief) ---- */
-  --pink: #E05D8E;
-  --black: #000000;
-  --green: #3A503C;
-  --cream: #FBF8F6;
+:root, :root[data-theme="light"] {
+  /* ---- Theme Specifications ---- */
+  --bg-primary: #FBF8F6;
+  --bg-secondary: #FFFFFF;
   --text-main: #000000;
+  --text-muted: #555555;
+  --brand-accent: #E05D8E;
+  --border-color: #E5E5E5;
+
+  /* ---- Brand palette ---- */
+  --pink: var(--brand-accent);
+  --black: var(--text-main);
+  --green: #3A503C;
+  --cream: var(--bg-primary);
   --text-light: #FBF8F6;
 
-  /* ---- Derived tints (kept close to source hues) ---- */
-  --cream-deep: #F1E6DE;      /* warmer secondary background */
-  --pink-tint: #F9E3EC;       /* soft chip / hover backgrounds */
-  --pink-deep: #B8436A;       /* pressed / hover state on pink */
-  --green-tint: #E7ECE4;      /* soft green backgrounds */
-  --black-soft: #1A1714;      /* near-black for large text blocks (less harsh than pure black) */
-  --line: rgba(0, 0, 0, 0.12);
+  /* ---- Derived tints ---- */
+  --cream-deep: #F1E6DE;
+  --pink-tint: #F9E3EC;
+  --pink-deep: #B8436A;
+  --green-tint: #E7ECE4;
+  --black-soft: #1A1714;
+  --line: var(--border-color);
 
+  /* ---- Header background ---- */
+  --header-bg: rgba(251, 248, 246, 0.92);
+}
+
+:root[data-theme="dark"] {
+  /* ---- Theme Specifications ---- */
+  --bg-primary: #000000;
+  --bg-secondary: #121212;
+  --text-main: #FBF8F6;
+  --text-muted: #AAAAAA;
+  --brand-accent: #E05D8E;
+  --border-color: #262626;
+
+  /* ---- Brand palette ---- */
+  --pink: var(--brand-accent);
+  --black: var(--text-main);
+  --green: #3A503C;
+  --cream: var(--bg-primary);
+  --text-light: #FBF8F6;
+
+  /* ---- Derived tints ---- */
+  --cream-deep: #121212;
+  --pink-tint: #2C1A22;
+  --pink-deep: #F48FB1;
+  --green-tint: #1C261C;
+  --black-soft: #E5E0DD;
+  --line: var(--border-color);
+
+  /* ---- Header background ---- */
+  --header-bg: rgba(0, 0, 0, 0.92);
+}
+
+:root {
   /* ---- Type ---- */
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -168,7 +208,7 @@ h3 { font-size: var(--step-h3); }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(251, 248, 246, 0.92);
+  background: var(--header-bg);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -400,7 +440,7 @@ h3 { font-size: var(--step-h3); }
 @media (max-width: 620px) { .card-grid { grid-template-columns: 1fr; } }
 
 .offer-card {
-  background: var(--cream);
+  background: var(--bg-secondary);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   padding: 1.6rem;
@@ -434,7 +474,7 @@ h3 { font-size: var(--step-h3); }
 
 /* ---------- Featured items ---------- */
 .item-card {
-  background: var(--cream);
+  background: var(--bg-secondary);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -1018,4 +1058,83 @@ h3 { font-size: var(--step-h3); }
 .form-feedback.error {
   color: #FF5A5F;
 }
+
+/* ---------- Theme Toggle ---------- */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--black);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: auto;
+  transition: border-color 180ms var(--ease), color 180ms var(--ease), transform 180ms var(--ease);
+}
+.theme-toggle:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+  transform: scale(1.05);
+}
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  transition: transform 300ms var(--ease);
+}
+.theme-toggle:hover svg {
+  transform: rotate(15deg);
+}
+
+/* Toggle icons display based on theme */
+:root[data-theme="light"] .theme-toggle .sun-icon { display: none; }
+:root[data-theme="light"] .theme-toggle .moon-icon { display: block; }
+:root[data-theme="dark"] .theme-toggle .sun-icon { display: block; }
+:root[data-theme="dark"] .theme-toggle .moon-icon { display: none; }
+
+/* In mobile layouts, adjust margin to place it nicely near nav toggle */
+@media (max-width: 780px) {
+  .theme-toggle {
+    margin-left: auto;
+    margin-right: 0.5rem;
+  }
+}
+
+@media (min-width: 781px) {
+  .nav-menu {
+    margin-left: auto;
+  }
+  .theme-toggle {
+    margin-left: 1.5rem;
+  }
+}
+
+/* ---------- Logo Switching ---------- */
+:root[data-theme="light"] .dark-logo { display: none !important; }
+:root[data-theme="light"] .light-logo { display: block !important; }
+:root[data-theme="dark"] .dark-logo { display: block !important; }
+:root[data-theme="dark"] .light-logo { display: none !important; }
+
+/* Custom styled scrollbars for dark mode */
+:root[data-theme="dark"] ::-webkit-scrollbar {
+  width: 10px;
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-sm);
+}
+:root[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-accent);
+}
+
 

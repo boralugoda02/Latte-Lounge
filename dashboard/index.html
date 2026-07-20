@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latte Lounge Content Manager</title>
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Admin UI Override styles -->
+    <link rel="stylesheet" href="admin-theme.css">
+  </head>
+  <body>
+    <!-- Decap CMS App -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // Register preview style for the preview panel
+      CMS.registerPreviewStyle('admin-theme.css');
+      
+      // Netlify Identity Login redirect
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/dashboard/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
