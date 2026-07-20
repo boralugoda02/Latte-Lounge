@@ -83,103 +83,78 @@ _(Replace with the real GitHub Pages URL once the repository is deployed.)_
 
 ## Content Management (Git-based CMS)
 
-This site ships with a Git-based CMS admin dashboard at **`/admin`**, built
-on [Sveltia CMS](https://github.com/sveltia/sveltia-cms) (a modern,
-actively-maintained fork of Decap/Netlify CMS). There is **no database and
-no build step** — the admin panel edits JSON files under `/data` and
-commits them straight to this GitHub repository. `assets/js/content.js`
-fetches those JSON files at runtime and renders them into the page, so a
-saved edit is live the moment the commit lands (a minute or two, once
-GitHub Pages redeploys).
+This site is integrated with **Decap CMS** (a single-page static admin app) located at `/admin`. There is **no database and no build step** — the admin panel communicates directly with GitHub's REST API using **Netlify Identity** and **Git Gateway** to write changes directly back to your repository. 
 
-**What's editable through the dashboard:**
+Our dynamic client engine (`assets/js/content.js`) fetches these updated JSON files from the repository at runtime and injects them into semantic templates.
 
-| Collection | File | Controls |
+**Editable content paths managed by Decap CMS:**
+
+| Collection | Target Path | Formats & Widgets |
 |---|---|---|
-| Homepage Offers | `data/offers.json` | The 3 "Current Happenings" cards |
-| Signature Items | `data/items.json` | The 3 featured menu items + photos |
-| Site Settings | `data/settings.json` | Hours, phone, address, map, social links |
+| **Landing Page Content** | `assets/data/offers.json` | Section Title (string), Offers Cards (list of cards: heading, description, tag: COFFEE/CAKE/SNACK) |
+| **Cafe Menu Items** | `assets/data/menu/*.json` | Individual JSON documents containing Item Name, Price (LKR, integer), Description, Item Category (COFFEE/CAKE/SNACK), and Featured on Home Page (boolean) |
+| **Site Settings** | `assets/data/content.json` | Site settings (Hours, Phone display/digits, Address lines, Google Maps iframe embed URL, and Social links) |
 
-Content that isn't in `/data` (page copy, the About page story, values,
-overall layout) still lives directly in the HTML — that's intentional, to
-keep the CMS focused on things that change often.
+---
 
-### One-time setup (do this after pushing to GitHub)
+### One-Time Git & Decap CMS Initialization Flow
 
-You have two ways to log into the CMS. **Start with Option A** — it takes two
-minutes and needs no extra accounts. Option B is only worth the extra setup
-if more than one person will use the dashboard.
+To fully initialize the CMS for production, follow this step-by-step pipeline:
 
-#### Option A — Sign in with a Personal Access Token (recommended solo setup)
+#### 1. Push code to GitHub
+If you haven't already, push this project to your GitHub repository (see [Pushing to GitHub](#pushing-to-github)). Ensure your repository is **Public** for free GitHub Pages hosting.
 
-This works immediately, with nothing to deploy:
+#### 2. Create Netlify Project & Link Repository
+Decap CMS uses **Netlify Identity** to manage logins. You do not need to host your production assets on Netlify (you can keep using GitHub Pages), but Netlify must act as the authorization gateway.
+1. Create a free account at [Netlify.com](https://www.netlify.com/).
+2. Click **Add new site** → **Import an existing project**.
+3. Connect your Git provider (GitHub) and choose your `latte-lounge` repository.
+4. Leave build settings empty (since this is a plain static site, no build command is needed; build directory is root `.`). Click **Deploy**.
 
-1. Push this project to GitHub (see [Pushing to GitHub](#pushing-to-github) below).
-2. Go to **GitHub → Settings → Developer settings → Personal access tokens
-   → Fine-grained tokens → Generate new token**
-   (direct link: [github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new))
-3. Fill it in:
-   - **Token name:** `Latte Lounge CMS`
-   - **Expiration:** whatever you're comfortable with (90 days, 1 year, etc. — you can always generate a new one later)
-   - **Repository access:** *Only select repositories* → choose `latte-lounge`
-   - **Permissions → Repository permissions → Contents:** set to **Read and write**
-4. Click **Generate token** and copy it immediately (GitHub only shows it once).
-5. Visit `https://boralugoda02.github.io/latte-lounge/admin/`
-6. Click **Sign In with Token**, paste the token, and you're in.
+#### 3. Configure Netlify Identity & Git Gateway
+This handles the secure authentication handshake:
+1. In the Netlify dashboard, go to your site settings: **Site configuration → Identity**.
+2. Click **Enable Identity**.
+3. Under **Registration preferences**, change registration from **Open** to **Invite only** (this prevents random visitors from trying to sign up for your dashboard).
+4. Scroll down to **Services → Git Gateway**, and click **Enable Git Gateway**. This authorizes Netlify to make commits directly to your GitHub repository on behalf of logged-in editors.
 
-Keep the token private — anyone with it can edit and commit to the repo.
-If it ever leaks, revoke it from the same GitHub settings page and generate
-a new one.
+#### 4. Enable Netlify Identity in the Code
+We have pre-configured the Identity widget scripts:
+- Netlify's Widget script is loaded in the `<head>` of all HTML pages.
+- A redirect script is present at the bottom of `index.html` to listen for logins. When a user accepts an invitation and logs in for the first time, they will be redirected straight to the `/admin/` dashboard.
 
-#### Option B — GitHub OAuth login (better if multiple people will edit)
+#### 5. Invite Editors and Log In
+1. Go back to Netlify's **Identity** tab and click **Invite users**.
+2. Enter your email address (and the emails of any other editors).
+3. You will receive an invitation email. Click the link to accept it, create a password, and log in.
+4. Visit `https://<your-github-username>.github.io/latte-lounge/admin/` (or your custom domain `/admin`) to open Decap CMS, log in with your credentials, and start publishing!
 
-This needs a small OAuth step that can't be done from inside the code — a
-few clicks on GitHub and a free OAuth helper:
+---
 
-**1. Create a GitHub OAuth App**
+### Custom Domain Configuration & DNS Mapping
 
-- Go to **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
-  (direct link: [github.com/settings/applications/new](https://github.com/settings/applications/new))
-- **Application name:** `Latte Lounge CMS`
-- **Homepage URL:** `https://boralugoda02.github.io/latte-lounge/`
-- **Authorization callback URL:** `https://boralugoda02.github.io/latte-lounge/admin/`
-- Click **Register application**, then generate a **Client Secret** and
-  copy both the **Client ID** and **Client Secret** somewhere safe.
+To point your custom domain (e.g., `www.lattelounge.lk`) to the site, map the DNS records as follows:
 
-**2. Deploy the free auth helper (Sveltia's OAuth proxy)**
+#### For GitHub Pages Deployments:
+1. In your GitHub repository, navigate to **Settings → Pages**.
+2. Scroll to **Custom domain**, enter your domain, and click **Save**.
+3. Log in to your DNS provider (e.g. GoDaddy, Namecheap, Cloudflare) and configure:
+   - **A Records**: Point `@` (root) to GitHub Pages IPs:
+     - `185.199.108.153`
+     - `185.199.109.153`
+     - `185.199.110.153`
+     - `185.199.111.153`
+   - **CNAME Record**: Point `www` to your GitHub Pages URL (e.g., `boralugoda02.github.io`).
+4. Wait for DNS propagation, then check **Enforce HTTPS** in GitHub Pages.
 
-Sveltia CMS needs a tiny serverless function to complete the GitHub login
-handshake (GitHub Pages alone can't do this — it's a static host). The
-easiest option is Cloudflare Workers (free tier is enough):
+#### For Netlify Gateway Deployments:
+If hosting directly on Netlify:
+1. In your Netlify dashboard, go to **Site configuration → Domain management → Custom domains** and click **Add custom domain**.
+2. Map your DNS records:
+   - **A Record**: Point `@` (root) to Netlify's load balancer IP: `75.2.60.5`
+   - **CNAME Record**: Point `www` to your Netlify site URL (e.g. `your-site-name.netlify.app`).
 
-- Follow Sveltia's guide: [github.com/sveltia/sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth)
-  — it's a one-click "Deploy to Cloudflare Workers" button.
-- When deploying, paste in the **Client ID** and **Client Secret** from
-  step 1 as environment variables.
-- You'll get a Worker URL like `https://sveltia-cms-auth.<you>.workers.dev`.
-
-**3. Add that Worker URL to `admin/config.yml`**
-
-Open `admin/config.yml` and add a `base_url` line under `backend:`:
-
-```yaml
-backend:
-  name: github
-  repo: boralugoda02/latte-lounge
-  branch: main
-  base_url: https://sveltia-cms-auth.<you>.workers.dev
-```
-
-**4. Log in and start editing**
-
-- Visit `https://boralugoda02.github.io/latte-lounge/admin/`
-- Click **Login with GitHub**, authorize the OAuth app
-- Edit an offer, an item, or a setting, and click **Publish** — this
-  creates a real commit on `main` and the live site updates shortly after
-
-**Who can edit:** anyone who is a **collaborator on the GitHub repo** (add
-them under **Settings → Collaborators**). The CMS doesn't have its own
-user system — GitHub access *is* the access control.
+---
 
 ## Local Installation
 

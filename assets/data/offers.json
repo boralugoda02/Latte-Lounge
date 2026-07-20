@@ -1,0 +1,20 @@
+{
+  "title": "What's brewing this week",
+  "cards": [
+    {
+      "heading": "Seasonal Sri Lankan Spiced Coffee",
+      "description": "Estate-grown beans slow-brewed with cardamom, clove and a touch of jaggery — the way the hill country warms up on a misty morning.",
+      "tag": "COFFEE"
+    },
+    {
+      "heading": "Weekend High Tea Platter for Two",
+      "description": "Love cake, butter cookies and short eats served with a pot of Uva tea — a proper pause for two, every Saturday and Sunday.",
+      "tag": "CAKE"
+    },
+    {
+      "heading": "Traveler's Express Breakfast Deal",
+      "description": "Milk toast, an egg roti and your choice of coffee or tea, plated fast for anyone still tackling the hairpin bends ahead.",
+      "tag": "SNACK"
+    }
+  ]
+}

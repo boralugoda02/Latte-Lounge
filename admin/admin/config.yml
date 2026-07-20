@@ -1,0 +1,83 @@
+backend:
+  name: github
+  repo: boralugoda02/Latte-Lounge   # <-- change if your GitHub username/repo differs
+  branch: main
+
+# Where uploaded images land, and the path used to reference them in content.
+media_folder: "assets/images"
+public_folder: "assets/images"
+
+# Editors log in with their own GitHub account (must be a collaborator
+# on the repo). Every save creates a real git commit.
+site_url: https://boralugoda02.github.io/Latte-Lounge/
+display_url: https://boralugoda02.github.io/Latte-Lounge/
+logo_url: assets/images/logo-mark.png
+
+collections:
+  - name: "offers"
+    label: "Homepage Offers"
+    description: "The three 'Current Happenings' cards on the homepage."
+    files:
+      - name: "offers"
+        label: "Current Happenings"
+        file: "data/offers.json"
+        fields:
+          - label: "Offers"
+            name: "offers"
+            widget: "list"
+            summary: "{{title}}"
+            min: 1
+            max: 6
+            fields:
+              - { label: "Tag", name: "tag", widget: "select", options: ["Coffee", "Cake", "Snack"] }
+              - { label: "Tag Style (leave matching Tag: tag-coffee / tag-cake / tag-snack)", name: "tagClass", widget: "select", options: ["tag-coffee", "tag-cake", "tag-snack"] }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Date / Availability Label", name: "dateLabel", widget: "string" }
+              - { label: "Date (for sorting)", name: "dateISO", widget: "date", format: "YYYY-MM-DD" }
+
+  - name: "items"
+    label: "Signature Menu Items"
+    description: "The three featured items on the homepage."
+    files:
+      - name: "items"
+        label: "Signature Items"
+        file: "data/items.json"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            summary: "{{name}} — {{price}}"
+            min: 1
+            max: 6
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Price", name: "price", widget: "string", hint: "e.g. Rs. 1,250" }
+              - { label: "Tag", name: "tag", widget: "select", options: ["Coffee", "Cake", "Snack"] }
+              - { label: "Tag Style (match Tag: tag-coffee / tag-cake / tag-snack)", name: "tagClass", widget: "select", options: ["tag-coffee", "tag-cake", "tag-snack"] }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Photo", name: "image", widget: "image" }
+
+  - name: "settings"
+    label: "Site Settings"
+    description: "Hours, phone, address, map, and social links — used across every page."
+    files:
+      - name: "settings"
+        label: "General Settings"
+        file: "data/settings.json"
+        fields:
+          - { label: "Hours (short, e.g. hero badge)", name: "hoursShort", widget: "string" }
+          - { label: "Hours (long, contact page)", name: "hoursLong", widget: "string" }
+          - { label: "Phone (display)", name: "phoneDisplay", widget: "string" }
+          - { label: "Phone (digits only, for tel: link, e.g. +94571234567)", name: "phoneHref", widget: "string" }
+          - { label: "Address line 1", name: "addressLine1", widget: "string" }
+          - { label: "Address line 2", name: "addressLine2", widget: "string" }
+          - { label: "Address line 3", name: "addressLine3", widget: "string" }
+          - { label: "Address (short, footer)", name: "addressShort", widget: "string" }
+          - { label: "Google Maps embed URL", name: "mapEmbedUrl", widget: "string" }
+          - label: "Social Links"
+            name: "socials"
+            widget: "object"
+            fields:
+              - { label: "Facebook URL", name: "facebook", widget: "string" }
+              - { label: "TikTok URL", name: "tiktok", widget: "string" }
