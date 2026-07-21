@@ -1,15 +1,15 @@
 {
-  "hoursShort": "9:00 AM – 7:00 PM",
-  "hoursLong": "Every day, 9:00 AM – 7:00 PM",
-  "phoneDisplay": "+94 57 123 4567",
-  "phoneHref": "+94571234567",
-  "addressLine1": "Latte Lounge by 7's",
-  "addressLine2": "Beragala–Hali Ela Road",
-  "addressLine3": "Bandarawela, Sri Lanka",
-  "addressShort": "Beragala–Hali Ela Road, Bandarawela",
-  "mapEmbedUrl": "https://www.google.com/maps?q=Bandarawela,Sri+Lanka&output=embed",
   "socials": {
     "facebook": "#",
     "tiktok": "#"
-  }
+  },
+  "addressShort": "Beragala–Hali Ela Road, Bandarawela",
+  "addressLine1": "Latte Lounge by 7's",
+  "addressLine2": "Beragala–Hali Ela Road",
+  "hoursLong": "Every day, 9:00 AM – 7:00 PM",
+  "addressLine3": "Bandarawela, Sri Lanka",
+  "hoursShort": "9:00 AM – 7:00 PM",
+  "mapEmbedUrl": "https://www.google.com/maps?q=Bandarawela,Sri+Lanka&output=embed",
+  "phoneDisplay": "+94 70 154 0194",
+  "phoneHref": "+94571234567"
 }
